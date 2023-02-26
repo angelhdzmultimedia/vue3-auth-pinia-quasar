@@ -1,14 +1,48 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { Notify } from 'quasar'
 import { useRouter } from 'vue-router'
 
 const email = ref('')
 const password = ref('')
+const guardarCredenciales = ref(false)
 
 const auth = useAuthStore()
 const router = useRouter()
+
+onMounted(() => {
+  const cookie = localStorage.getItem('credentials')
+  const data = JSON.parse(cookie) ?? { saveCredentials: false }
+
+  if (data.saveCredentials) {
+    email.value = data.email
+    password.value = data.password
+    guardarCredenciales.value = data.saveCredentials
+  }
+
+  watch(guardarCredenciales, (newValue) => {
+    if (newValue) {
+      localStorage.setItem(
+        'credentials',
+        JSON.stringify({
+          saveCredentials: true,
+          email: email.value,
+          password: password.value,
+        })
+      )
+    } else {
+      localStorage.setItem(
+        'credentials',
+        JSON.stringify({
+          saveCredentials: false,
+          email: undefined,
+          password: undefined,
+        })
+      )
+    }
+  })
+})
 
 async function login() {
   try {
@@ -32,6 +66,11 @@ async function login() {
     <QForm @submit.prevent="login" class="column q-gutter-md">
       <QInput v-model="email" label="Email" dense></QInput>
       <QInput v-model="password" label="Password" dense></QInput>
+      <span
+        >¿Guardar credenciales?
+        <QToggle v-model="guardarCredenciales" color="primary"
+      /></span>
+
       <QBtn color="primary" type="submit">Login</QBtn>
     </QForm>
 

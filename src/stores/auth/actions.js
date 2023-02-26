@@ -2,8 +2,16 @@ import { isLoading, user, isAuth } from './state'
 
 const serverUrl = 'http://localhost:5000'
 
+function esperar(milisegundos) {
+  new Promise((resolve) => {
+    setTimeout(resolve, milisegundos)
+  })
+}
+
 export async function loadProfile() {
   isLoading.value = true
+  await esperar(200)
+
   try {
     const response = await fetch(`${serverUrl}/api/auth/user`)
 

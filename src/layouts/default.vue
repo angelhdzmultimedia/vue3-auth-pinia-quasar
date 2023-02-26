@@ -39,7 +39,8 @@ async function logout() {
 
     <QPageContainer class="window-width window-height">
       <QPage class="column full-width full-height">
-        <RouterView :key="$route.path" />
+        <QSpinner v-if="auth.isLoading" color="primary" size="3em" />
+        <RouterView v-else :key="$route.path" />
       </QPage>
     </QPageContainer>
   </QLayout>
