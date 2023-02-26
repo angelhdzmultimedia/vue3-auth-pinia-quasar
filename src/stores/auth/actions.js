@@ -28,7 +28,8 @@ export async function loadProfile() {
 
 export async function logout() {
   await wait(timeout.value)
-  return fetch(`${serverUrl}/api/auth/logout`)
+  await fetch(`${serverUrl}/api/auth/logout`)
+  isAuth.value = false
 }
 
 export async function login(loginData) {
