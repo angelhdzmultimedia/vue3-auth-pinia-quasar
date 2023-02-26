@@ -48,18 +48,18 @@ async function register() {
       full-width full-height
     "
   >
-    <span class="text-h6"> Register </span>
+    <span class="text-h6"> Registro </span>
     <QForm @submit.prevent="register" class="column q-gutter-md">
-      <QInput v-model="name" label="Name" dense></QInput>
-      <QInput v-model="username" label="Username" dense></QInput>
-      <QInput v-model="email" label="Email" dense></QInput>
-      <QInput v-model="password" label="Password" dense></QInput>
-      <QBtn color="primary" type="submit">Register</QBtn>
+      <QInput v-model="name" label="Nombre" dense></QInput>
+      <QInput v-model="username" label="Nombre Usuario" dense></QInput>
+      <QInput v-model="email" label="Correo Electrónico" dense></QInput>
+      <QInput v-model="password" label="Contraseña" dense></QInput>
+      <QBtn color="purple" type="submit">Registrarme</QBtn>
     </QForm>
 
     <div class="column q-gutter-sm items-center">
-      <span>Already registered?</span>
-      <QBtn color="purple" to="/login">Login</QBtn>
+      <span>¿Tienes una cuenta?</span>
+      <QBtn color="primary" to="/login">Iniciar Sesión</QBtn>
     </div>
   </div>
 </template>

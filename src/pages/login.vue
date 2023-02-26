@@ -60,21 +60,20 @@ async function login() {
 
 <template>
   <div class="column items-center q-mt-lg q-gutter-sm full-width full-height">
-    <span class="text-h6"> Login </span>
+    <span class="text-h6"> Iniciar Sesión </span>
     <QForm @submit.prevent="login" class="column q-gutter-md">
-      <QInput v-model="email" label="Email" dense></QInput>
-      <QInput v-model="password" label="Password" dense></QInput>
+      <QInput v-model="email" label="Correo Electrónico" dense></QInput>
+      <QInput v-model="password" label="Contraseña" dense></QInput>
       <span
-        >¿Guardar credenciales?
-        <QToggle v-model="guardarCredenciales" color="primary"
+        >Recuérdame <QToggle v-model="guardarCredenciales" color="primary"
       /></span>
 
-      <QBtn color="primary" type="submit">Login</QBtn>
+      <QBtn color="primary" type="submit">Iniciar Sesión</QBtn>
     </QForm>
 
     <div class="column q-gutter-sm items-center">
-      <span>Don't have an account?</span>
-      <QBtn color="purple" to="/register">Register</QBtn>
+      <span>¿No tienes una cuenta?</span>
+      <QBtn color="purple" to="/register">Registrarme</QBtn>
     </div>
   </div>
 </template>
