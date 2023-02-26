@@ -1,11 +1,17 @@
 <script setup>
+import { onMounted } from 'vue'
 import { RouterView } from 'vue-router'
-import { Dark } from 'quasar'
 import { useAuthStore } from './stores/auth'
+import { Dark } from 'quasar'
+import { useStorageStore } from './stores/storage'
 
 const auth = useAuthStore()
+const storage = useStorageStore()
 
-Dark.set(true)
+onMounted(() => {
+  const { data: dark } = storage.get('darkMode')
+  Dark.set(dark.value)
+})
 </script>
 
 <template>
