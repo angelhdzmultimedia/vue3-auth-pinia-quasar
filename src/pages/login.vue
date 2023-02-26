@@ -4,6 +4,7 @@ import { useAuthStore } from '../stores/auth'
 import { useStorageStore } from '../stores/storage'
 import { Notify } from 'quasar'
 import { useRouter } from 'vue-router'
+import { isEmail, isRequired } from '../utils/form-validation'
 
 const email = ref('')
 const password = ref('')
@@ -60,10 +61,25 @@ async function login() {
 
 <template>
   <div class="column items-center q-mt-lg q-gutter-sm full-width full-height">
-    <span class="text-h6"> Iniciar Sesión </span>
+    <span class="text-h6"> Inicio de Sesión </span>
     <QForm @submit.prevent="login" class="column q-gutter-md">
-      <QInput v-model="email" label="Correo Electrónico" dense></QInput>
-      <QInput v-model="password" label="Contraseña" dense></QInput>
+      <QInput
+        lazy-rules
+        :rules="[
+          isEmail('Correo electrónico no válido.'),
+          isRequired('Email requerido.'),
+        ]"
+        v-model="email"
+        label="Correo Electrónico"
+        dense
+      ></QInput>
+      <QInput
+        lazy-rules
+        :rules="[, isRequired('Contraseña requerida.')]"
+        v-model="password"
+        label="Contraseña"
+        dense
+      ></QInput>
       <span
         >Recuérdame <QToggle v-model="guardarCredenciales" color="primary"
       /></span>
