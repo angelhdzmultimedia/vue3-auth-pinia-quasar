@@ -6,8 +6,9 @@ const auth = useAuthStore()
 <template>
   <main class="column items-center justify-center full-width full-height">
     <span class="text-h6"
-      >¡Te damos la bienvenida,
-      {{ auth.isAuth ? auth.user?.name : 'guest' }}!</span
+      >¡Te damos la bienvenida{{
+        auth.isAuth ? `, ${auth.user?.name}` : ''
+      }}!</span
     >
   </main>
 </template>
