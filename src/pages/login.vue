@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth'
+import { useStorageStore } from '../stores/storage'
 import { Notify } from 'quasar'
 import { useRouter } from 'vue-router'
 
@@ -8,38 +9,35 @@ const email = ref('')
 const password = ref('')
 const guardarCredenciales = ref(false)
 
+// Pinia Stores
 const auth = useAuthStore()
+const storage = useStorageStore()
+
 const router = useRouter()
 
 onMounted(() => {
-  const cookie = localStorage.getItem('credentials')
-  const data = JSON.parse(cookie) ?? { saveCredentials: false }
+  const { get } = useStorageStore()
+  const { data: credentials, set: setCredentials } = get('credentials')
 
-  if (data.saveCredentials) {
-    email.value = data.email
-    password.value = data.password
-    guardarCredenciales.value = data.saveCredentials
+  if (credentials.value.isSaved) {
+    email.value = credentials.value.email
+    password.value = credentials.value.password
+    guardarCredenciales.value = credentials.value.isSaved
   }
 
   watch(guardarCredenciales, (newValue) => {
     if (newValue) {
-      localStorage.setItem(
-        'credentials',
-        JSON.stringify({
-          saveCredentials: true,
-          email: email.value,
-          password: password.value,
-        })
-      )
+      setCredentials({
+        isSaved: true,
+        email: email.value,
+        password: password.value,
+      })
     } else {
-      localStorage.setItem(
-        'credentials',
-        JSON.stringify({
-          saveCredentials: false,
-          email: undefined,
-          password: undefined,
-        })
-      )
+      setCredentials({
+        isSaved: false,
+        email: undefined,
+        password: undefined,
+      })
     }
   })
 })
