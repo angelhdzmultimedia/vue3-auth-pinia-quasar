@@ -49,14 +49,17 @@ async function toggleDark() {
             <QList>
               <QItem to="/profile" clickable>
                 <QItemSection>{{
-                  auth.isAuth ? auth.user?.name : 'Guest'
+                  auth.isAuth ? auth.user?.name : 'Invitado/a'
                 }}</QItemSection>
               </QItem>
               <QItem v-if="!auth.isAuth" clickable>
-                <QBtn color="primary" to="/login">Login</QBtn>
+                <QBtn color="primary" to="/login">Iniciar Sesión</QBtn>
+              </QItem>
+              <QItem v-if="!auth.isAuth" clickable>
+                <QBtn color="purple" to="/register">Regístrate</QBtn>
               </QItem>
               <QItem v-if="auth.isAuth" clickable>
-                <QBtn @click="logout" color="primary">Logout</QBtn>
+                <QBtn @click="logout" color="primary">Salir</QBtn>
               </QItem>
             </QList>
           </QMenu>

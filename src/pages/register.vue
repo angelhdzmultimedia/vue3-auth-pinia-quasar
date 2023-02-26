@@ -89,7 +89,7 @@ async function register() {
         counter
         dense
       ></QInput>
-      <QBtn color="purple" type="submit">Registrarme</QBtn>
+      <QBtn color="purple" type="submit">Regístrate</QBtn>
     </QForm>
 
     <div class="column q-gutter-sm items-center">
