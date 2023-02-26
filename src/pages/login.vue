@@ -4,8 +4,8 @@ import { useAuthStore } from '../stores/auth'
 import { Notify } from 'quasar'
 import { useRouter } from 'vue-router'
 
-const email = ref('angelhdz@gmail.com')
-const password = ref('123456')
+const email = ref('')
+const password = ref('')
 
 const auth = useAuthStore()
 const router = useRouter()
