@@ -87,8 +87,8 @@ authRouter.get('/user', (req, res) => {
 })
 
 app.use((req, res, next) => {
-  if (req.url === '/') {
-    return res.redirect(clientUrl)
+  if (!req.url.startsWith('/api')) {
+    return res.redirect(`${clientUrl}${req.url}`)
   }
   return next()
 })

@@ -82,6 +82,7 @@ async function register() {
           isLength(6, 16, 'La contraseña debe ser de 6 a 16 caracteres.'),
         ]"
         v-model="password"
+        type="password"
         label="Contraseña"
         min="6"
         max="16"

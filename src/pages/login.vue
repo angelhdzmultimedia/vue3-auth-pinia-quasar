@@ -77,6 +77,7 @@ async function login() {
         lazy-rules
         :rules="[, isRequired('Contraseña requerida.')]"
         v-model="password"
+        type="password"
         label="Contraseña"
         dense
       ></QInput>

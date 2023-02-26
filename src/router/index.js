@@ -44,6 +44,10 @@ const router = createRouter({
 router.beforeResolve(async (to) => {
   const auth = useAuthStore()
 
+  if ((to.path === '/login' || to.path === '/register') && auth.isAuth) {
+    return '/'
+  }
+
   if (to.meta.requiresProfile) {
     await auth.loadProfile()
   }
