@@ -1,13 +1,26 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { RouterView, useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { Dark } from 'quasar'
 import { useStorageStore } from '../stores/storage'
 
+const simularConexionLenta = ref(false)
+
 const router = useRouter()
 const auth = useAuthStore()
 const storage = useStorageStore()
+
+watch(simularConexionLenta, (newValue) => {
+  auth.timeout = newValue ? 1000 : 0
+  const { _, set: setSlowMode } = storage.get('slowMode')
+  setSlowMode(newValue)
+})
+
+onMounted(() => {
+  const { data: slowMode } = storage.get('slowMode')
+  simularConexionLenta.value = slowMode.value ?? false
+})
 
 async function logout() {
   await auth.logout()
@@ -50,7 +63,12 @@ async function toggleDark() {
         </QAvatar>
       </QToolbar>
     </QHeader>
-
+    <QFooter class="q-pa-sm bg-dark">
+      <QToolBar>
+        <span>Simular Conexión lenta</span>
+        <QToggle v-model="simularConexionLenta" />
+      </QToolBar>
+    </QFooter>
     <QPageContainer class="window-width window-height">
       <QPage class="column full-width full-height">
         <RouterView :key="$route.path" />
