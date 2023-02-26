@@ -11,10 +11,6 @@ export function isValid(fn, message = 'Value not valid!') {
   return (value) => fn(value) || message
 }
 
-export function isCharactersLimit(
-  min,
-  max,
-  message = 'Characters length not valid!'
-) {
-  return (value) => (value.length >= min && vale.length <= max) || message
+export function isLength(min, max, message = 'Characters length not valid!') {
+  return (value) => (value.length >= min && value.length <= max) || message
 }
