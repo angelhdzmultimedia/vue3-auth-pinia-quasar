@@ -23,19 +23,23 @@ export function logout() {
 }
 
 export async function login(loginData) {
-  const response = await fetch(`${serverUrl}/api/auth/login`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify(loginData),
-  })
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch(`${serverUrl}/api/auth/login`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(loginData),
+    })
 
-  if (response.ok) {
-    const data = await response.json()
-    user.value = { ...data }
-    isAuth.value = true
-  }
+    if (response.ok) {
+      const data = await response.json()
+      user.value = { ...data }
+      isAuth.value = true
+      return resolve()
+    }
+    return reject(await response.text())
+  })
 }
 
 export async function register(registerData) {

@@ -32,15 +32,19 @@ authRouter.post('/login', (req, res) => {
   const user = users.find((item) => item.email === email)
 
   if (!user) {
-    throw new HttpError({ statusCode: 404, statusMessage: 'User not found' })
+    return res.status(404).send({
+      statusMessage: 'User not found',
+      statusCode: 404,
+    })
   }
 
   if (password !== user.password) {
-    throw new HttpError({
-      statusCode: 403,
+    return res.status(403).send({
       statusMessage: 'Email or password not valid',
+      statusCode: 403,
     })
   }
+
   return res.status(200).send({
     ...user,
     password: undefined,
@@ -53,9 +57,9 @@ authRouter.post('/register', (req, res) => {
   const user = users.find((item) => item.email === email)
 
   if (user) {
-    throw new HttpError({
-      statusCode: 409,
+    return res.status(409).send({
       statusMessage: 'User already exists',
+      statusCode: 409,
     })
   }
 
@@ -69,11 +73,17 @@ authRouter.post('/register', (req, res) => {
 
   users.push(newUser)
 
-  return res.status(201).send(newUser)
+  return res.status(201).send({
+    ...newUser,
+    password: undefined,
+  })
 })
 
 authRouter.get('/user', (req, res) => {
-  return res.status(404).send('User not found')
+  return res.status(404).send({
+    statusMessage: 'User not found',
+    statusCode: 404,
+  })
 })
 
 app.use((req, res, next) => {

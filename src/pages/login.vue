@@ -12,15 +12,14 @@ const router = useRouter()
 
 async function login() {
   try {
-    await auth.login({
+    const response = await auth.login({
       email: email.value,
       password: password.value,
     })
     return router.push('/')
   } catch (error) {
-    const nuxtError = error
     Notify.create({
-      message: nuxtError.message,
+      message: error,
       type: 'negative',
     })
   }

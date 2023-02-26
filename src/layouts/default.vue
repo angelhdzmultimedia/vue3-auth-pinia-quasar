@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
+
+const router = useRouter()
 const auth = useAuthStore()
+
+async function logout() {
+  await auth.logout()
+  return router.push('/login')
+}
 </script>
 
 <template>
@@ -32,7 +39,7 @@ const auth = useAuthStore()
 
     <QPageContainer class="window-width window-height">
       <QPage class="column full-width full-height">
-        <RouterView />
+        <RouterView :key="$route.path" />
       </QPage>
     </QPageContainer>
   </QLayout>

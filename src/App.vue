@@ -6,7 +6,7 @@ Dark.set(true)
 </script>
 
 <template>
-  <RouterView />
+  <RouterView :key="$route.path" />
 </template>
 
 <style scoped></style>

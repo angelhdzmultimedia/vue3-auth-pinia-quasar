@@ -14,17 +14,24 @@ const router = useRouter()
 
 async function register() {
   try {
-    const data = await auth.register({
+    const response = await auth.register({
       email: email.value,
       password: password.value,
       name: name.value,
       username: username.value,
     })
-    return router.push('/login')
+
+    if (response.ok) {
+      return router.push('/login')
+    } else {
+      Notify.create({
+        message: await response.text(),
+        type: 'negative',
+      })
+    }
   } catch (error) {
-    const nuxtError = error
     Notify.create({
-      message: nuxtError.message,
+      message: error,
       type: 'negative',
     })
   }
