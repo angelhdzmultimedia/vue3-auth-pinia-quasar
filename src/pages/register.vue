@@ -40,7 +40,7 @@ async function register() {
 </script>
 
 <template>
-  <div
+  <main
     class="
       column
       q-pb-md
@@ -95,7 +95,7 @@ async function register() {
       <span>¿Tienes una cuenta?</span>
       <QBtn color="primary" to="/login">Iniciar Sesión</QBtn>
     </div>
-  </div>
+  </main>
 </template>
 
 <style scoped></style>

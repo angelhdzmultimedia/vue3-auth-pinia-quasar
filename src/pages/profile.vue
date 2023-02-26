@@ -5,7 +5,9 @@ const auth = useAuthStore()
 </script>
 
 <template>
-  <main class="column items-center justify-center full-width full-height">
+  <main
+    class="column items-center justify-center full-width full-height"
+  >
     <span class="text-h6">Perfil</span>
     <div class="column">
       <span>Nombre: {{ auth.user?.name }}</span>

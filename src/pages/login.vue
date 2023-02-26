@@ -60,7 +60,7 @@ async function login() {
 </script>
 
 <template>
-  <div class="column items-center q-mt-lg q-gutter-sm full-width full-height">
+  <main class="column items-center q-mt-lg q-gutter-sm full-width full-height">
     <span class="text-h6"> Inicio de Sesión </span>
     <QForm @submit.prevent="login" class="column q-gutter-md">
       <QInput
@@ -91,7 +91,7 @@ async function login() {
       <span>¿No tienes una cuenta?</span>
       <QBtn color="purple" to="/register">Registrarme</QBtn>
     </div>
-  </div>
+  </main>
 </template>
 
 <style scoped></style>

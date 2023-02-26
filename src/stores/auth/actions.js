@@ -2,15 +2,15 @@ import { isLoading, user, isAuth } from './state'
 
 const serverUrl = 'http://localhost:5000'
 
-function esperar(milisegundos) {
-  new Promise((resolve) => {
-    setTimeout(resolve, milisegundos)
+function wait(milisegundos) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(), milisegundos)
   })
 }
 
 export async function loadProfile() {
   isLoading.value = true
-  await esperar(200)
+  await wait(500)
 
   try {
     const response = await fetch(`${serverUrl}/api/auth/user`)
@@ -26,12 +26,14 @@ export async function loadProfile() {
   }
 }
 
-export function logout() {
+export async function logout() {
+  await wait(500)
   return fetch(`${serverUrl}/api/auth/logout`)
 }
 
 export async function login(loginData) {
   return new Promise(async (resolve, reject) => {
+    await wait(500)
     const response = await fetch(`${serverUrl}/api/auth/login`, {
       headers: {
         'Content-Type': 'application/json',
@@ -51,6 +53,7 @@ export async function login(loginData) {
 }
 
 export async function register(registerData) {
+  await wait(500)
   return fetch(`${serverUrl}/api/auth/register`, {
     headers: {
       'Content-Type': 'application/json',
