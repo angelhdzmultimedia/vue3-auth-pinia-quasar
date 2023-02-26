@@ -7,12 +7,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'DefaultLayout',
-      component: import('../layouts/default.vue'),
+      component: () => import('../layouts/default.vue'),
       children: [
         {
           path: '',
           name: 'IndexPage',
-          component: import('../pages/index.vue'),
+          component: () => import('../pages/index.vue'),
           meta: {
             requiresProfile: true,
           },
@@ -20,17 +20,17 @@ const router = createRouter({
         {
           path: 'login',
           name: 'LoginPage',
-          component: import('../pages/login.vue'),
+          component: () => import('../pages/login.vue'),
         },
         {
           path: 'register',
           name: 'RegisterPage',
-          component: import('../pages/register.vue'),
+          component: () => import('../pages/register.vue'),
         },
         {
           path: 'profile',
           name: 'ProfilePage',
-          component: import('../pages/profile.vue'),
+          component: () => import('../pages/profile.vue'),
           meta: {
             requiresProfile: true,
             requiresAuth: true,
