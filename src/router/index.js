@@ -13,6 +13,9 @@ const router = createRouter({
           path: '',
           name: 'IndexPage',
           component: import('../pages/index.vue'),
+          meta: {
+            requiresProfile: true,
+          },
         },
         {
           path: 'login',
@@ -29,6 +32,7 @@ const router = createRouter({
           name: 'ProfilePage',
           component: import('../pages/profile.vue'),
           meta: {
+            requiresProfile: true,
             requiresAuth: true,
           },
         },
@@ -40,7 +44,9 @@ const router = createRouter({
 router.beforeResolve(async (to) => {
   const auth = useAuthStore()
 
-  await auth.loadProfile()
+  if (to.meta.requiresProfile) {
+    await auth.loadProfile()
+  }
 
   if (to.meta.requiresAuth && !auth.isAuth) {
     return '/login'

@@ -12,7 +12,7 @@ const auth = useAuthStore()
 const storage = useStorageStore()
 
 watch(simularConexionLenta, (newValue) => {
-  auth.timeout = newValue ? 1000 : 0
+  auth.timeout = newValue ? 2000 : 0
   const { _, set: setSlowMode } = storage.get('slowMode')
   setSlowMode(newValue)
 })
@@ -63,7 +63,10 @@ async function toggleDark() {
         </QAvatar>
       </QToolbar>
     </QHeader>
-    <QFooter class="q-pa-sm bg-dark">
+    <QFooter
+      class="q-pa-sm"
+      :class="Dark.isActive ? 'bg-dark text-white' : 'bg-grey-2 text-black'"
+    >
       <QToolBar>
         <span>Simular Conexión lenta</span>
         <QToggle v-model="simularConexionLenta" />
