@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView, useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
+import { Dark } from 'quasar'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -17,6 +18,10 @@ async function logout() {
       <QToolbar>
         <QBtn icon="home" to="/"></QBtn>
         <QToolbarTitle>App</QToolbarTitle>
+        <QBtn
+          @click="Dark.toggle"
+          :icon="!Dark.isActive ? 'light_mode' : 'dark_mode'"
+        ></QBtn>
         <QAvatar class="cursor-pointer" color="white">
           <QMenu auto-close>
             <QList>
